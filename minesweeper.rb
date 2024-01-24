@@ -90,6 +90,27 @@ class Minesweeper
     # Verify surrounding flags and execute appropriate actions
   end
 
+  def to_s
+    # print the whole minseweeper table, 
+    # X for unopened, O for opened, and F for flagged
+    rows = []
+    dimensions[0].times do |row|
+      row_string = ""
+      dimensions[1].times do |col|
+        if hidden?(row, col)
+          row_string += "X"
+        elsif flagged?(row, col)
+          row_string += "F"
+        else
+          row_string += "O"
+        end
+        row_string += " "
+      end
+      rows << row_string.strip
+    end
+    rows.join("\n")
+  end
+
   def search_DFS_till_numbered_tiles(row, col)
     opened_tiles = []
     stack = [[row, col]]
@@ -116,5 +137,6 @@ class Minesweeper
 end
 
 mines_game = Minesweeper.new('easy', [10,10], 10)
+puts "==================\n\n\n\n #{Minesweeper.inspect} \n\n\n==================\n\n\n\n"
 mines_game.click(0,0)
 mines_game.train_using_dqn()

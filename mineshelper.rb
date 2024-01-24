@@ -5,23 +5,23 @@ module MinesHelper
     end
 
     def not_a_mine?(row,col)
-    
+        !mine?(row, col)
     end
 
     def opened?(row,col)
-        same as !hidden?(row,col)
+        !hidden?(row,col)
     end
     
     def numbered?(row,col)
-        same as (not_a_mine?(row,col)? && opened?(row,col))
+        (not_a_mine?(row,col)? && opened?(row,col))
     end
     
     def flagged?(row,col)
-            
+        self.flagged_positions.include?([row,col])
     end
     
     def hidden?(row,col)
-        
+        self.hidden[row][col]
     end
     
     def unflagged?(row,col)
@@ -29,7 +29,7 @@ module MinesHelper
     end
     
     def go_easy_on_user?
-        level == easy?
+        level == 'easy'
     end
 
     # more helpers  
